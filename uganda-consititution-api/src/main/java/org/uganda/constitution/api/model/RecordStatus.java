@@ -1,4 +1,4 @@
-package org.uganda.constitution.model;
+package org.uganda.constitution.api.model;
 
 /**
  * enumerates the status of a record

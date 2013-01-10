@@ -9,7 +9,7 @@
  * Created on Jan 8, 2013, 10:14:00 AM
  */
 
-package org.uganda.constitution.widgets;
+package org.uganda.constitution.admin.widgets;
 
 import org.uganda.constitution.StringConstants;
 
@@ -42,11 +42,11 @@ public class UgandaConsititution extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 652, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 460, Short.MAX_VALUE)
         );
 
         pack();

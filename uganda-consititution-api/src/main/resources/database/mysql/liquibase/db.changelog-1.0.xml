@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+    <changeSet author="Jonathan (generated)" id="1357822851356-1">
+        <createTable tableName="act">
+            <column name="id" type="varchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="actPK"/>
+            </column>
+            <column name="record_status" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="act_number" type="varchar(255)"/>
+            <column name="title" type="varchar(255)"/>
+            <column name="article_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-2">
+        <createTable tableName="article">
+            <column name="id" type="varchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="articlePK"/>
+            </column>
+            <column name="record_status" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="article_number" type="integer"/>
+            <column name="text_content" type="varchar(255)"/>
+            <column name="chapter_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="schedule_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-3">
+        <createTable tableName="chapter">
+            <column name="id" type="varchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="chapterPK"/>
+            </column>
+            <column name="record_status" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="chapter_number" type="integer"/>
+            <column name="chapter_theme" type="varchar(255)"/>
+            <column name="constitution_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-4">
+        <createTable tableName="clause">
+            <column name="id" type="varchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="clausePK"/>
+            </column>
+            <column name="record_status" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="clause_number" type="integer"/>
+            <column name="text_content" type="varchar(255)"/>
+            <column name="article_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="objective_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="schedule_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-5">
+        <createTable tableName="constitution">
+            <column name="id" type="varchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="constitutionPK"/>
+            </column>
+            <column name="record_status" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="c_language" type="varchar(255)"/>
+            <column name="name" type="varchar(255)"/>
+            <column name="c_year" type="integer"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-6">
+        <createTable tableName="objective">
+            <column name="id" type="varchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="objectivePK"/>
+            </column>
+            <column name="record_status" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="objective_number" type="varchar(255)"/>
+            <column name="text_content" type="varchar(255)"/>
+            <column name="objective_group_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-7">
+        <createTable tableName="objective_group">
+            <column name="id" type="varchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="objective_groPK"/>
+            </column>
+            <column name="record_status" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+            <column name="obj_group_number" type="integer"/>
+            <column name="text_content" type="varchar(255)"/>
+            <column name="constitution_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-8">
+        <createTable tableName="part">
+            <column name="id" type="varchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="partPK"/>
+            </column>
+            <column name="record_status" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="part_number" type="integer"/>
+            <column name="title" type="varchar(255)"/>
+            <column name="act_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-9">
+        <createTable tableName="part_section">
+            <column name="id" type="varchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="part_sectionPK"/>
+            </column>
+            <column name="record_status" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="section_number" type="varchar(255)"/>
+            <column name="text_content" type="varchar(255)"/>
+            <column name="part_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-10">
+        <createTable tableName="rule">
+            <column name="id" type="varchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="rulePK"/>
+            </column>
+            <column name="record_status" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rule_number" type="varchar(255)"/>
+            <column name="sINo" type="varchar(255)"/>
+            <column name="rule_of_procedure_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-11">
+        <createTable tableName="rule_of_procedure">
+            <column name="id" type="varchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="rule_of_procePK"/>
+            </column>
+            <column name="record_status" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sINo" type="varchar(255)"/>
+            <column name="title" type="varchar(255)"/>
+            <column name="act_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-12">
+        <createTable tableName="schedule">
+            <column name="id" type="varchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="schedulePK"/>
+            </column>
+            <column name="record_status" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="schedule_number" type="integer"/>
+            <column name="schedule_title" type="varchar(255)"/>
+            <column name="text_content" type="varchar(255)"/>
+            <column name="constitution_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-13">
+        <createTable tableName="sub_chapter">
+            <column name="chapter_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sub_chapter_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-14">
+        <createTable tableName="sub_clause">
+            <column name="clause_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sub_clause_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-15">
+        <createTable tableName="sub_part">
+            <column name="part_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sub_part_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-16">
+        <createTable tableName="sub_rule">
+            <column name="rule_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sub_rule_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-17">
+        <createTable tableName="sub_section">
+            <column name="part_section_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sub_section_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-23">
+        <addForeignKeyConstraint baseColumnNames="article_id" baseTableName="act" constraintName="FK1789276E9FB6" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="article"/>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-24">
+        <addForeignKeyConstraint baseColumnNames="chapter_id" baseTableName="article" constraintName="FKD458CCF65643CC56" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="chapter"/>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-25">
+        <addForeignKeyConstraint baseColumnNames="schedule_id" baseTableName="article" constraintName="FKD458CCF6DFBF341E" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="schedule"/>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-26">
+        <addForeignKeyConstraint baseColumnNames="constitution_id" baseTableName="chapter" constraintName="FK2C0C7C4D7C00C79E" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="constitution"/>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-27">
+        <addForeignKeyConstraint baseColumnNames="article_id" baseTableName="clause" constraintName="FKAF0F8D6F76E9FB6" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="article"/>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-28">
+        <addForeignKeyConstraint baseColumnNames="objective_id" baseTableName="clause" constraintName="FKAF0F8D6F5CE615D6" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="objective"/>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-29">
+        <addForeignKeyConstraint baseColumnNames="schedule_id" baseTableName="clause" constraintName="FKAF0F8D6FDFBF341E" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="schedule"/>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-30">
+        <addForeignKeyConstraint baseColumnNames="objective_group_id" baseTableName="objective" constraintName="FKA736B93947D462AB" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="objective_group"/>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-31">
+        <addForeignKeyConstraint baseColumnNames="constitution_id" baseTableName="objective_group" constraintName="FKB6C883F97C00C79E" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="constitution"/>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-32">
+        <addForeignKeyConstraint baseColumnNames="act_id" baseTableName="part" constraintName="FK3463F3A37BE836" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="act"/>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-33">
+        <addForeignKeyConstraint baseColumnNames="part_id" baseTableName="part_section" constraintName="FKC215E699E208E89E" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="part"/>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-34">
+        <addForeignKeyConstraint baseColumnNames="rule_of_procedure_id" baseTableName="rule" constraintName="FK3596FCA58D9008" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="rule_of_procedure"/>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-35">
+        <addForeignKeyConstraint baseColumnNames="act_id" baseTableName="rule_of_procedure" constraintName="FK9A1F76CEA37BE836" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="act"/>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-36">
+        <addForeignKeyConstraint baseColumnNames="constitution_id" baseTableName="schedule" constraintName="FKD66692977C00C79E" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="constitution"/>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-37">
+        <addForeignKeyConstraint baseColumnNames="chapter_id" baseTableName="sub_chapter" constraintName="FK31BA14E5643CC56" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="chapter"/>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-38">
+        <addForeignKeyConstraint baseColumnNames="sub_chapter_id" baseTableName="sub_chapter" constraintName="FK31BA14E1A6FBB5" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="chapter"/>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-39">
+        <addForeignKeyConstraint baseColumnNames="clause_id" baseTableName="sub_clause" constraintName="FK94F7444EDC8BC61E" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="clause"/>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-40">
+        <addForeignKeyConstraint baseColumnNames="sub_clause_id" baseTableName="sub_clause" constraintName="FK94F7444E2C65AEDF" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="clause"/>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-41">
+        <addForeignKeyConstraint baseColumnNames="part_id" baseTableName="sub_part" constraintName="FK840A4692E208E89E" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="part"/>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-42">
+        <addForeignKeyConstraint baseColumnNames="sub_part_id" baseTableName="sub_part" constraintName="FK840A4692B9180D9F" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="part"/>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-43">
+        <addForeignKeyConstraint baseColumnNames="rule_id" baseTableName="sub_rule" constraintName="FK840B799B6D9C1FFE" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="rule"/>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-44">
+        <addForeignKeyConstraint baseColumnNames="sub_rule_id" baseTableName="sub_rule" constraintName="FK840B799B44AB44FF" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="rule"/>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-45">
+        <addForeignKeyConstraint baseColumnNames="part_section_id" baseTableName="sub_section" constraintName="FK4C7EA3E6914FB122" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="part_section"/>
+    </changeSet>
+    <changeSet author="Jonathan (generated)" id="1357822851356-46">
+        <addForeignKeyConstraint baseColumnNames="sub_section_id" baseTableName="sub_section" constraintName="FK4C7EA3E663F4D4B5" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="part_section"/>
+    </changeSet>
+</databaseChangeLog>
