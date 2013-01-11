@@ -4,28 +4,46 @@
  */
 
 /*
- * UgandaConsititution.java
+ * AddOrEditConstitution.java
  *
- * Created on Jan 8, 2013, 10:14:00 AM
+ * Created on Jan 11, 2013, 1:03:56 PM
  */
-
 package org.uganda.constitution.admin.widgets;
 
-import org.uganda.constitution.SpringConfigurationLoader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.uganda.constitution.ContentValidator;
+import org.uganda.constitution.MessageBox;
 import org.uganda.constitution.StringConstants;
-
-
+import org.uganda.constitution.api.model.Constitution;
+import org.uganda.constitution.api.model.exception.ValidationException;
+import org.uganda.constitution.api.service.ConstitutionService;
+import org.uganda.constitution.api.service.impl.ConstitutionServiceImpl;
 
 /**
- * Main laucher for the Uganda Constitution.
  *
  * @author Jonathan
  */
-public class UgandaConsititution extends javax.swing.JFrame {
+public class AddOrEditConstitution extends javax.swing.JFrame {
 
-    /** Creates new form UgandaConsititution */
-    public UgandaConsititution() {
+    private UgandaConsititution ugandaConstitution;
+    private Constitution constitution;
+    
+    @Autowired
+    private ConstitutionService constitutionService;
+
+    /** Creates new form AddOrEditConstitution */
+    public AddOrEditConstitution(UgandaConsititution ugandaConstitution, Constitution constitution) {
+        this.ugandaConstitution = ugandaConstitution;
+        this.constitution = constitution;
+        this.constitutionService = new ConstitutionServiceImpl();
+
         initComponents();
+    }
+
+    private AddOrEditConstitution() {
     }
 
     /** This method is called from within the constructor to
@@ -45,14 +63,21 @@ public class UgandaConsititution extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setName("jPanel1"); // NOI18N
@@ -62,7 +87,7 @@ public class UgandaConsititution extends javax.swing.JFrame {
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/uganda/constitution/images/court_of_arm.png"))); // NOI18N
-        jLabel1.setName("court_of_arm"); // NOI18N
+        jLabel1.setName("jLabel1"); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Constantia", 0, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -106,29 +131,21 @@ public class UgandaConsititution extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        jPanel4.setName("LeftPanel"); // NOI18N
+        jPanel4.setName("jPanel4"); // NOI18N
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
         jPanel3.setName("jPanel3"); // NOI18N
 
         jButton1.setForeground(new java.awt.Color(44, 44, 130));
-        jButton1.setText("New");
-        jButton1.setToolTipText("add new constitution");
-        jButton1.setName("newBtn"); // NOI18N
+        jButton1.setText("Back");
+        jButton1.setToolTipText("Navigate Back");
+        jButton1.setName("backBtn"); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-
-        jButton2.setForeground(new java.awt.Color(44, 44, 130));
-        jButton2.setText("Edit");
-        jButton2.setName("editBtn"); // NOI18N
-
-        jButton3.setForeground(new java.awt.Color(44, 44, 130));
-        jButton3.setText("Delete");
-        jButton3.setName("deleteBtn"); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -136,21 +153,14 @@ public class UgandaConsititution extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
-                .addContainerGap(832, Short.MAX_VALUE))
+                .addContainerGap(956, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jButton1)
-                .addComponent(jButton2)
-                .addComponent(jButton3))
+            .addComponent(jButton1)
         );
 
-        jPanel5.setName("crumcombs"); // NOI18N
+        jPanel5.setName("jPanel5"); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Constantia", 0, 12)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -158,34 +168,134 @@ public class UgandaConsititution extends javax.swing.JFrame {
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel4.setName("jLabel4"); // NOI18N
 
+        jLabel5.setFont(new java.awt.Font("Constantia", 0, 12)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText(">>");
+        jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabel5.setName("jLabel5"); // NOI18N
+
+        jLabel6.setFont(new java.awt.Font("Constantia", 0, 12)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel6.setText("Add /  Edit Constitution");
+        jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabel6.setName("jLabel6"); // NOI18N
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
-                .addGap(950, 950, 950))
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                .addGap(789, 789, 789))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE))
+                .addContainerGap(6, Short.MAX_VALUE))
         );
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setName("jPanel6"); // NOI18N
 
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jPanel7.setName("jPanel7"); // NOI18N
+
+        jLabel7.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel7.setText("Constitution Name:");
+        jLabel7.setName("jLabel7"); // NOI18N
+
+        jTextField1.setName("constitutionNameTxtField"); // NOI18N
+
+        jLabel8.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel8.setText("Language:");
+        jLabel8.setName("jLabel8"); // NOI18N
+
+        jTextField2.setName("constitutionLanguageTxtField"); // NOI18N
+
+        jLabel9.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel9.setText("Year:");
+        jLabel9.setName("jLabel9"); // NOI18N
+
+        jTextField3.setName("jTextField3"); // NOI18N
+
+        jButton2.setForeground(new java.awt.Color(44, 44, 130));
+        jButton2.setText("Save");
+        jButton2.setName("saveBtn"); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel7Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(56, 56, 56)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel7Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(103, 103, 103)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel7Layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(135, 135, 135)
+                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(172, 172, 172)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(536, Short.MAX_VALUE))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addGap(14, 14, 14)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(151, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1023, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 278, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -225,10 +335,12 @@ public class UgandaConsititution extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1035, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 602, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -236,45 +348,61 @@ public class UgandaConsititution extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.setVisible(false);
-        AddOrEditConstitution addOrEditConstitution = new AddOrEditConstitution(this, null);
-        addOrEditConstitution.setVisible(true);
-        addOrEditConstitution.setExtendedState(this.MAXIMIZED_BOTH);
+        this.dispose();
+        constitution = null;
+        ugandaConstitution.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-    * @param args the command line arguments
-    */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            Constitution newConstitution = new Constitution();
+            newConstitution.setName(jTextField1.getText());
+            newConstitution.setLanguage(jTextField2.getText());
 
-               //Load the spring context file.
-               SpringConfigurationLoader.getConfigurationLoader();
-
-                UgandaConsititution ugandaConstitution = new UgandaConsititution();
-                ugandaConstitution.setVisible(true);
-                ugandaConstitution.setTitle(StringConstants.APPLICATION_TITLE);
-                ugandaConstitution.setExtendedState(MAXIMIZED_BOTH);
-
+            if (ContentValidator.isInteger(jTextField3.getText())) {
+                newConstitution.setYear(Integer.parseInt(jTextField3.getText()));
+            } else {
+                MessageBox.MessageBox("Suplied year not an integer", this, JOptionPane.ERROR_MESSAGE);
             }
-        });
-    }
 
+            constitutionService.save(newConstitution);
+            jTextField1.setText(StringConstants.EMPTY_STRING);
+            jTextField2.setText(StringConstants.EMPTY_STRING);
+            jTextField3.setText(StringConstants.EMPTY_STRING);
+
+            MessageBox.MessageBox("Constitution saved sucessfully.", this, JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (ValidationException ex) {
+            Logger.getLogger(AddOrEditConstitution.class.getName()).log(Level.SEVERE, null, ex);
+            MessageBox.MessageBox(ex.getMessage(), this, JOptionPane.ERROR_MESSAGE);
+        }
+
+
+
+
+
+    }//GEN-LAST:event_jButton2ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
-
 }

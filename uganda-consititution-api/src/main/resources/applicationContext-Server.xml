@@ -21,7 +21,9 @@
 	<aop:aspectj-autoproxy />
 	<context:annotation-config />
 	<context:component-scan base-package="org.uganda.constitution.api.service.impl" />
-
+        <context:component-scan base-package="org.uganda.constitution.api.service.dao.impl" />
+        <context:component-scan base-package="org.uganda.constitution.admin.widgets" />
+        
 	<!-- DATA ACCESS CONFIGURATION -->
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource"
@@ -77,5 +79,5 @@
 	</bean>
 
 	<bean id="metadataUtil"
-		class="org.mak.cis.mohr.dao.jpa.search.JPAAnnotationMetadataUtil" />
+		class="org.uganda.constitution.api.service.dao.jpa.search.JPAAnnotationMetadataUtil" />
 </beans>
