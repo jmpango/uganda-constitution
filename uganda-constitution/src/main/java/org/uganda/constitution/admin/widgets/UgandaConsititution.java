@@ -11,8 +11,8 @@
 
 package org.uganda.constitution.admin.widgets;
 
-import org.uganda.constitution.SpringConfigurationLoader;
 import org.uganda.constitution.StringConstants;
+import org.uganda.constitution.api.springbeans.ApplicationSpringBeans;
 
 
 
@@ -250,7 +250,7 @@ public class UgandaConsititution extends javax.swing.JFrame {
             public void run() {
 
                //Load the spring context file.
-               SpringConfigurationLoader.getConfigurationLoader();
+                ApplicationSpringBeans.getApplicationSpringBeans();
 
                 UgandaConsititution ugandaConstitution = new UgandaConsititution();
                 ugandaConstitution.setVisible(true);

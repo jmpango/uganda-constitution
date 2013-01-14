@@ -13,32 +13,32 @@ package org.uganda.constitution.admin.widgets;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.uganda.constitution.ContentValidator;
 import org.uganda.constitution.MessageBox;
 import org.uganda.constitution.StringConstants;
 import org.uganda.constitution.api.model.Constitution;
 import org.uganda.constitution.api.model.exception.ValidationException;
 import org.uganda.constitution.api.service.ConstitutionService;
-import org.uganda.constitution.api.service.impl.ConstitutionServiceImpl;
+import org.uganda.constitution.api.springbeans.ApplicationSpringBeans;
 
 /**
  *
  * @author Jonathan
  */
+@Component("addOrEditConsitution")
 public class AddOrEditConstitution extends javax.swing.JFrame {
 
     private UgandaConsititution ugandaConstitution;
     private Constitution constitution;
     
-    @Autowired
     private ConstitutionService constitutionService;
 
     /** Creates new form AddOrEditConstitution */
     public AddOrEditConstitution(UgandaConsititution ugandaConstitution, Constitution constitution) {
         this.ugandaConstitution = ugandaConstitution;
         this.constitution = constitution;
-        this.constitutionService = new ConstitutionServiceImpl();
+        this.constitutionService = ApplicationSpringBeans.getConstitutionService();
 
         initComponents();
     }
@@ -355,7 +355,13 @@ public class AddOrEditConstitution extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
-            Constitution newConstitution = new Constitution();
+            Constitution newConstitution;
+            if(constitution != null){
+                newConstitution = constitution;
+            }else{
+               newConstitution = new Constitution();
+            }
+             
             newConstitution.setName(jTextField1.getText());
             newConstitution.setLanguage(jTextField2.getText());
 
@@ -365,7 +371,9 @@ public class AddOrEditConstitution extends javax.swing.JFrame {
                 MessageBox.MessageBox("Suplied year not an integer", this, JOptionPane.ERROR_MESSAGE);
             }
 
+            constitutionService.validateConstitution(newConstitution);
             constitutionService.save(newConstitution);
+
             jTextField1.setText(StringConstants.EMPTY_STRING);
             jTextField2.setText(StringConstants.EMPTY_STRING);
             jTextField3.setText(StringConstants.EMPTY_STRING);
@@ -373,7 +381,7 @@ public class AddOrEditConstitution extends javax.swing.JFrame {
             MessageBox.MessageBox("Constitution saved sucessfully.", this, JOptionPane.INFORMATION_MESSAGE);
 
         } catch (ValidationException ex) {
-            Logger.getLogger(AddOrEditConstitution.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddOrEditConstitution.class.getName()).log(Level.INFO, null, ex);
             MessageBox.MessageBox(ex.getMessage(), this, JOptionPane.ERROR_MESSAGE);
         }
 
