@@ -14,6 +14,7 @@ import com.googlecode.genericdao.dao.jpa.GenericDAO;
 import com.googlecode.genericdao.dao.jpa.GenericDAOImpl;
 import com.googlecode.genericdao.search.Search;
 import com.googlecode.genericdao.search.jpa.JPASearchProcessor;
+import javax.persistence.PersistenceContextType;
 import org.apache.commons.lang.StringUtils;
 import org.uganda.constitution.api.service.dao.BaseDAO;
 import org.uganda.constitution.api.model.BaseData;
@@ -40,7 +41,7 @@ public abstract class BaseDAOImpl<T> extends GenericDAOImpl<T, String>
 
     protected EntityManager entityManager;
 
-    @PersistenceContext
+    @PersistenceContext(type=PersistenceContextType.EXTENDED)
     @Override
     public void setEntityManager(EntityManager entityManager) {
 	super.setEntityManager(entityManager);

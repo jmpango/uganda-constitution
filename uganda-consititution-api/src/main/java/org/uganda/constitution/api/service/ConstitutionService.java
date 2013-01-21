@@ -2,6 +2,7 @@ package org.uganda.constitution.api.service;
 
 import java.util.List;
 import org.uganda.constitution.api.model.Constitution;
+import org.uganda.constitution.api.model.ObjectiveGroup;
 import org.uganda.constitution.api.model.exception.ValidationException;
 
 /**
@@ -55,6 +56,4 @@ public interface ConstitutionService {
      * @return
      */
     List<Constitution> getConstitutions();
-    
-
 }

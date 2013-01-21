@@ -1,20 +1,18 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * UgandaConsititution.java
- *
- * Created on Jan 8, 2013, 10:14:00 AM
- */
-
 package org.uganda.constitution.admin.widgets;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import org.uganda.constitution.ContentValidator;
+import org.uganda.constitution.CreateJTable;
+import org.uganda.constitution.MessageBox;
 import org.uganda.constitution.StringConstants;
+import org.uganda.constitution.api.model.Constitution;
+import org.uganda.constitution.api.model.exception.ValidationException;
+import org.uganda.constitution.api.service.ConstitutionService;
 import org.uganda.constitution.api.springbeans.ApplicationSpringBeans;
-
-
 
 /**
  * Main laucher for the Uganda Constitution.
@@ -23,9 +21,34 @@ import org.uganda.constitution.api.springbeans.ApplicationSpringBeans;
  */
 public class UgandaConsititution extends javax.swing.JFrame {
 
+    private ConstitutionService constitutionService;
+    private CreateJTable createJTable;
+    private UgandaConsititution uGConstitution;
+    List<Constitution> constitutions;
+
     /** Creates new form UgandaConsititution */
     public UgandaConsititution() {
+        this.constitutionService = ApplicationSpringBeans.getConstitutionService();
+        initializeTableProperty();
         initComponents();
+        this.setExtendedState(MAXIMIZED_BOTH);
+        uGConstitution = this;
+
+        table.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    Object id = null;
+                    int i = table.getSelectedRow();
+                    id = table.getModel().getValueAt(i, 1);
+                    Constitution constitution = constitutionService.getConstitution((String) id);
+                    ViewObjGroupChapterSchedule addCOCSchedule = new ViewObjGroupChapterSchedule(uGConstitution, constitution);
+                    uGConstitution.dispose();
+                    addCOCSchedule.setVisible(true);
+                }
+            }
+        });
     }
 
     /** This method is called from within the constructor to
@@ -49,7 +72,8 @@ public class UgandaConsititution extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        table = table;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -64,12 +88,12 @@ public class UgandaConsititution extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/uganda/constitution/images/court_of_arm.png"))); // NOI18N
         jLabel1.setName("court_of_arm"); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Constantia", 0, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Constantia", 0, 24));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("The Laws of Uganda");
         jLabel2.setName("jLabel2"); // NOI18N
 
-        jLabel3.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Constantia", 0, 14));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("[ Admin ] ");
         jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -125,10 +149,20 @@ public class UgandaConsititution extends javax.swing.JFrame {
         jButton2.setForeground(new java.awt.Color(44, 44, 130));
         jButton2.setText("Edit");
         jButton2.setName("editBtn"); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setForeground(new java.awt.Color(44, 44, 130));
         jButton3.setText("Delete");
         jButton3.setName("deleteBtn"); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -152,7 +186,7 @@ public class UgandaConsititution extends javax.swing.JFrame {
 
         jPanel5.setName("crumcombs"); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Constantia", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Constantia", 0, 12));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel4.setText("Home");
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -174,36 +208,28 @@ public class UgandaConsititution extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel6.setName("jPanel6"); // NOI18N
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setName("jScrollPane1"); // NOI18N
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1023, Short.MAX_VALUE)
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 278, Short.MAX_VALUE)
-        );
+        table.setToolTipText("List of Constitutions");
+        jScrollPane1.setViewportView(table);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1023, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -235,32 +261,104 @@ public class UgandaConsititution extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void initializeTableProperty() {
+        constitutions = constitutionService.getConstitutions();
+        if (constitutions.size() == 0) {
+            table = ContentValidator.emptyTable();
+        } else {
+            //Construct the table column headers
+            List<String> columnHeaders = new ArrayList<String>();
+            columnHeaders.add("Id");
+            columnHeaders.add("Title");
+            columnHeaders.add("Language");
+            columnHeaders.add("Year");
+            //Construct  a list to contain the table data.
+            List<List<String>> tableContents = new ArrayList<List<String>>();
+            if (constitutions.size() > 0) {
+                for (Constitution constitution : constitutions) {
+                    List<String> tableContent = new ArrayList<String>();
+                    tableContent.add(constitution.getId());
+                    tableContent.add(constitution.getName());
+                    tableContent.add(constitution.getLanguage());
+                    tableContent.add(constitution.getYear() + "");
+                    tableContents.add(tableContent);
+                }
+            }
+            createJTable = new CreateJTable(columnHeaders, tableContents, this);
+            table = createJTable.getCreatedTable();
+        }
+    }
+
+    private void refreshTableData() {
+        initializeTableProperty();
+        jScrollPane1.setViewportView(table);
+    }
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.setVisible(false);
+        this.dispose();
         AddOrEditConstitution addOrEditConstitution = new AddOrEditConstitution(this, null);
         addOrEditConstitution.setVisible(true);
-        addOrEditConstitution.setExtendedState(this.MAXIMIZED_BOTH);
+        addOrEditConstitution.setExtendedState(MAXIMIZED_BOTH);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        boolean noError = ContentValidator.validTableCheckBoxHandler(table, this);
+        if (noError) {
+            Object id = null, checkBoxObj = null;
+            int i = table.getSelectedRow();
+            id = table.getModel().getValueAt(i, 1);
+            checkBoxObj = table.getModel().getValueAt(i, 0);
+            boolean isCheckBoxChecked = new Boolean((Boolean) checkBoxObj);
+
+            if (isCheckBoxChecked) {
+                Constitution constitution = constitutionService.getConstitution((String) id);
+                AddOrEditConstitution editConstitution = new AddOrEditConstitution(this, constitution);
+                this.dispose();
+                editConstitution.setVisible(true);
+            }
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        boolean noError = ContentValidator.validTableCheckBoxHandler(table, this);
+        if (noError) {
+            Object id = null, checkBoxObj = null;
+            int i = table.getSelectedRow();
+            id = table.getModel().getValueAt(i, 1);
+            checkBoxObj = table.getModel().getValueAt(i, 0);
+            boolean isCheckBoxChecked = new Boolean((Boolean) checkBoxObj);
+
+            if (isCheckBoxChecked) {
+                try {
+                    Constitution constitution = constitutionService.getConstitution((String) id);
+                    constitutionService.delete(constitution);
+                    refreshTableData();
+                    MessageBox.showMessage("Constitution Deleted Sucessfully", this, JOptionPane.INFORMATION_MESSAGE);
+                } catch (ValidationException ex) {
+                    MessageBox.showMessage(ex.getMessage(), this, JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
-    * @param args the command line arguments
-    */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
 
-               //Load the spring context file.
+                //Load the spring context file.
                 ApplicationSpringBeans.getApplicationSpringBeans();
 
                 UgandaConsititution ugandaConstitution = new UgandaConsititution();
+
                 ugandaConstitution.setVisible(true);
                 ugandaConstitution.setTitle(StringConstants.APPLICATION_TITLE);
-                ugandaConstitution.setExtendedState(MAXIMIZED_BOTH);
-
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -274,7 +372,7 @@ public class UgandaConsititution extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
-
 }

@@ -16,7 +16,6 @@ import javax.swing.JOptionPane;
 import org.springframework.stereotype.Component;
 import org.uganda.constitution.ContentValidator;
 import org.uganda.constitution.MessageBox;
-import org.uganda.constitution.StringConstants;
 import org.uganda.constitution.api.model.Constitution;
 import org.uganda.constitution.api.model.exception.ValidationException;
 import org.uganda.constitution.api.service.ConstitutionService;
@@ -41,6 +40,13 @@ public class AddOrEditConstitution extends javax.swing.JFrame {
         this.constitutionService = ApplicationSpringBeans.getConstitutionService();
 
         initComponents();
+
+        if(constitution != null){
+            cNameTxtField.setText(constitution.getName());
+            cLanguageTxtField.setText(constitution.getLanguage());
+            cYearTxtField.setText(constitution.getYear()+"");
+        }
+
     }
 
     private AddOrEditConstitution() {
@@ -70,11 +76,11 @@ public class AddOrEditConstitution extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        cNameTxtField = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        cLanguageTxtField = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        cYearTxtField = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -89,12 +95,12 @@ public class AddOrEditConstitution extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/uganda/constitution/images/court_of_arm.png"))); // NOI18N
         jLabel1.setName("jLabel1"); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Constantia", 0, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Constantia", 0, 24));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("The Laws of Uganda");
         jLabel2.setName("jLabel2"); // NOI18N
 
-        jLabel3.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Constantia", 0, 14));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("[ Admin ] ");
         jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -162,19 +168,19 @@ public class AddOrEditConstitution extends javax.swing.JFrame {
 
         jPanel5.setName("jPanel5"); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Constantia", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Constantia", 0, 12));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel4.setText("Home");
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel4.setName("jLabel4"); // NOI18N
 
-        jLabel5.setFont(new java.awt.Font("Constantia", 0, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Constantia", 0, 12));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText(">>");
         jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel5.setName("jLabel5"); // NOI18N
 
-        jLabel6.setFont(new java.awt.Font("Constantia", 0, 12)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Constantia", 0, 12));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel6.setText("Add /  Edit Constitution");
         jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -210,23 +216,23 @@ public class AddOrEditConstitution extends javax.swing.JFrame {
         jPanel7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         jPanel7.setName("jPanel7"); // NOI18N
 
-        jLabel7.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel7.setText("Constitution Name:");
         jLabel7.setName("jLabel7"); // NOI18N
 
-        jTextField1.setName("constitutionNameTxtField"); // NOI18N
+        cNameTxtField.setName("constitutionNameTxtField"); // NOI18N
 
-        jLabel8.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel8.setText("Language:");
         jLabel8.setName("jLabel8"); // NOI18N
 
-        jTextField2.setName("constitutionLanguageTxtField"); // NOI18N
+        cLanguageTxtField.setName("constitutionLanguageTxtField"); // NOI18N
 
-        jLabel9.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel9.setText("Year:");
         jLabel9.setName("jLabel9"); // NOI18N
 
-        jTextField3.setName("jTextField3"); // NOI18N
+        cYearTxtField.setName("cYearTxtField"); // NOI18N
 
         jButton2.setForeground(new java.awt.Color(44, 44, 130));
         jButton2.setText("Save");
@@ -249,15 +255,15 @@ public class AddOrEditConstitution extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel7Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addGap(56, 56, 56)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cNameTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel7Layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addGap(103, 103, 103)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cLanguageTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel7Layout.createSequentialGroup()
                                 .addComponent(jLabel9)
                                 .addGap(135, 135, 135)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(cYearTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(172, 172, 172)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -268,16 +274,16 @@ public class AddOrEditConstitution extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cNameTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addGap(14, 14, 14)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cLanguageTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cYearTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(151, Short.MAX_VALUE))
@@ -335,12 +341,10 @@ public class AddOrEditConstitution extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1035, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 602, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -362,27 +366,27 @@ public class AddOrEditConstitution extends javax.swing.JFrame {
                newConstitution = new Constitution();
             }
              
-            newConstitution.setName(jTextField1.getText());
-            newConstitution.setLanguage(jTextField2.getText());
+            newConstitution.setName(cNameTxtField.getText());
+            newConstitution.setLanguage(cLanguageTxtField.getText());
 
-            if (ContentValidator.isInteger(jTextField3.getText())) {
-                newConstitution.setYear(Integer.parseInt(jTextField3.getText()));
+            if (ContentValidator.isInteger(cYearTxtField.getText())) {
+                newConstitution.setYear(Integer.parseInt(cYearTxtField.getText()));
             } else {
-                MessageBox.MessageBox("Suplied year not an integer", this, JOptionPane.ERROR_MESSAGE);
+                MessageBox.showMessage("Suplied year not an integer", this, JOptionPane.ERROR_MESSAGE);
             }
 
             constitutionService.validateConstitution(newConstitution);
             constitutionService.save(newConstitution);
-
-            jTextField1.setText(StringConstants.EMPTY_STRING);
-            jTextField2.setText(StringConstants.EMPTY_STRING);
-            jTextField3.setText(StringConstants.EMPTY_STRING);
-
-            MessageBox.MessageBox("Constitution saved sucessfully.", this, JOptionPane.INFORMATION_MESSAGE);
-
+            
+           this.dispose();
+           UgandaConsititution  ugConstitution = new UgandaConsititution();
+           ugConstitution.setVisible(true);
+           MessageBox.showMessage("Constitution saved sucessfully.", ugConstitution, JOptionPane.INFORMATION_MESSAGE);
+           
+           
         } catch (ValidationException ex) {
             Logger.getLogger(AddOrEditConstitution.class.getName()).log(Level.INFO, null, ex);
-            MessageBox.MessageBox(ex.getMessage(), this, JOptionPane.ERROR_MESSAGE);
+            MessageBox.showMessage(ex.getMessage(), this, JOptionPane.ERROR_MESSAGE);
         }
 
 
@@ -391,6 +395,9 @@ public class AddOrEditConstitution extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton2ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField cLanguageTxtField;
+    private javax.swing.JTextField cNameTxtField;
+    private javax.swing.JTextField cYearTxtField;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -409,8 +416,5 @@ public class AddOrEditConstitution extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }

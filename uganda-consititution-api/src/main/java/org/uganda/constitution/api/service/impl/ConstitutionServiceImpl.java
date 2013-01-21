@@ -1,11 +1,11 @@
 package org.uganda.constitution.api.service.impl;
 
 import java.util.List;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.uganda.constitution.api.model.Act;
 import org.uganda.constitution.api.service.dao.ConstitutionDAO;
 import org.uganda.constitution.api.model.Constitution;
 import org.uganda.constitution.api.model.RecordStatus;
@@ -39,6 +39,18 @@ public class ConstitutionServiceImpl implements ConstitutionService {
     public void validateConstitution(Constitution constitution) throws ValidationException {
         if (constitution == null) {
             throw new ValidationException("supplied constitution is null");
+        }
+
+        if (StringUtils.isEmpty(constitution.getName())) {
+            throw new ValidationException("supplied constitution is missing name");
+        }
+
+        if (StringUtils.isEmpty(constitution.getLanguage())) {
+            throw new ValidationException("supplied constitution is missing language");
+        }
+
+        if (constitution.getYear() <= 0) {
+            throw new ValidationException("supplied constitution year is invalid");
         }
     }
 
