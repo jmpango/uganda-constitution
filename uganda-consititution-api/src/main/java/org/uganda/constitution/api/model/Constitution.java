@@ -1,11 +1,13 @@
 package org.uganda.constitution.api.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.Cascade;
 
 /**
  * Represents the constitution hierarchy.
@@ -13,17 +15,24 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "constitution")
-public class Constitution extends BaseData{
+public class Constitution extends BaseData {
+
     private String name;
     private List<ObjectiveGroup> objectiveGroups;
-    private List<Chapter>   chapters;
-    private List<Schedule>  schedules;
+    private List<Chapter> chapters;
+    private List<Schedule> schedules;
     private String language;
     private int year;
 
-    public Constitution(){}
+    public Constitution() {
+    }
 
-    @OneToMany(mappedBy = "constitution", cascade = { CascadeType.ALL })
+    @OneToMany(mappedBy = "constitution", cascade = {CascadeType.ALL})
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE,
+        org.hibernate.annotations.CascadeType.DELETE,
+        org.hibernate.annotations.CascadeType.MERGE,
+        org.hibernate.annotations.CascadeType.PERSIST,
+        org.hibernate.annotations.CascadeType.DELETE_ORPHAN})
     public List<Chapter> getChapters() {
         return chapters;
     }
@@ -31,8 +40,13 @@ public class Constitution extends BaseData{
     public void setChapters(List<Chapter> chapters) {
         this.chapters = chapters;
     }
-    
-    @OneToMany(mappedBy = "constitution", cascade = { CascadeType.ALL })
+
+    @OneToMany(mappedBy = "constitution")
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE,
+        org.hibernate.annotations.CascadeType.DELETE,
+        org.hibernate.annotations.CascadeType.MERGE,
+        org.hibernate.annotations.CascadeType.PERSIST,
+        org.hibernate.annotations.CascadeType.DELETE_ORPHAN})
     public List<ObjectiveGroup> getObjectiveGroups() {
         return objectiveGroups;
     }
@@ -50,7 +64,12 @@ public class Constitution extends BaseData{
         this.name = name;
     }
 
-    @OneToMany(mappedBy = "constitution", cascade = { CascadeType.ALL })
+    @OneToMany(mappedBy = "constitution", cascade = {CascadeType.ALL})
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE,
+        org.hibernate.annotations.CascadeType.DELETE,
+        org.hibernate.annotations.CascadeType.MERGE,
+        org.hibernate.annotations.CascadeType.PERSIST,
+        org.hibernate.annotations.CascadeType.DELETE_ORPHAN})
     public List<Schedule> getSchedules() {
         return schedules;
     }
@@ -77,4 +96,63 @@ public class Constitution extends BaseData{
         this.year = year;
     }
 
+    public void addObjectiveGroup(ObjectiveGroup objectiveGroup) {
+        if (objectiveGroup == null) {
+            return;
+        }
+
+        if (getObjectiveGroups() == null) {
+            setObjectiveGroups(new ArrayList<ObjectiveGroup>());
+        }
+
+        getObjectiveGroups().add(objectiveGroup);
+    }
+
+    public void removeObjectiveGroup(ObjectiveGroup objectiveGroup) {
+        if (objectiveGroup == null || getObjectiveGroups() == null) {
+            return;
+        }
+
+        getObjectiveGroups().remove(objectiveGroup);
+    }
+
+    public void addSchedules(Schedule schedule) {
+        if (schedule == null) {
+            return;
+        }
+
+        if (getSchedules() == null) {
+            setSchedules(new ArrayList<Schedule>());
+        }
+
+        getSchedules().add(schedule);
+    }
+
+    public void removeSchedule(Schedule schedule) {
+        if (schedule == null || getSchedules() == null) {
+            return;
+        }
+
+        getSchedules().remove(schedule);
+    }
+
+    public void addChapter(Chapter chapter) {
+        if (chapter == null) {
+            return;
+        }
+
+        if (getChapters() == null) {
+            setChapters(new ArrayList<Chapter>());
+        }
+
+        getChapters().add(chapter);
+    }
+
+    public void removeChapter(Chapter chapter) {
+        if (chapter == null || getChapters() == null) {
+            return;
+        }
+
+        getChapters().remove(chapter);
+    }
 }

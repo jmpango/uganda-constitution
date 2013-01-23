@@ -73,7 +73,7 @@ public class Schedule  extends BaseData{
         this.schedule_title = schedule_title;
     }
 
-    @Column(name = "text_content", nullable = true)
+    @Column(name = "text_content", nullable = true,length=10000)
     public String getTextContent() {
         return textContent;
     }

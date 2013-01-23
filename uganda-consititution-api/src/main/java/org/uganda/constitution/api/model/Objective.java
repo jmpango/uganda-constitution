@@ -51,7 +51,7 @@ public class Objective extends BaseData {
         this.objectiveNumber = objectiveNumber;
     }
 
-    @Column(name = "text_content", nullable = true)
+    @Column(name = "text_content", nullable = true,length=10000)
     public String getTextContent() {
         return textContent;
     }

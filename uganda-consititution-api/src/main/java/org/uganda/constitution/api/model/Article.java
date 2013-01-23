@@ -64,7 +64,7 @@ public class Article extends BaseData {
         this.clauses = clauses;
     }
 
-    @Column(name = "text_content", nullable = true)
+    @Column(name = "text_content", nullable = true, length=10000)
     public String getTextContent() {
         return textContent;
     }
@@ -73,7 +73,7 @@ public class Article extends BaseData {
         this.textContent = textContent;
     }
 
-     @ManyToOne()
+    @ManyToOne()
     @JoinColumn(name = "schedule_id", nullable = false)
     public Schedule getSchedule() {
         return schedule;

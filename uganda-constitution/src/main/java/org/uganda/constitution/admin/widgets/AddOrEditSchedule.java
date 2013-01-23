@@ -9,42 +9,42 @@ import org.uganda.constitution.ContentValidator;
 import org.uganda.constitution.MessageBox;
 import org.uganda.constitution.api.model.Constitution;
 import org.uganda.constitution.api.model.exception.ValidationException;
-import org.uganda.constitution.api.model.ObjectiveGroup;
+import org.uganda.constitution.api.model.Schedule;
 import org.uganda.constitution.api.service.ConstitutionService;
-import org.uganda.constitution.api.service.ObjectiveGroupService;
+import org.uganda.constitution.api.service.ScheduleService;
 
 /**
  *
  * @author Jonathan
  */
-@Component("addOrEditObjectiveGroup")
-public class AddOrEditObjectGroup extends javax.swing.JFrame {
+@Component("addOrEditSchedule")
+public class AddOrEditSchedule extends javax.swing.JFrame {
 
-    private ObjectiveGroup objGroup;
-    private ObjectiveGroupService objGroupService;
+    private Schedule schedule;
+    private ScheduleService scheduleService;
     private ConstitutionService constitutionService;
     private Constitution constitution;
-    private int objectiveGroupSaved = 0;
+    private int scheduleSaved = 0;
     private int tabbedPaneActiveTab = 0;
 
-    public AddOrEditObjectGroup(String constitutionId, ObjectiveGroup objGroup, ConstitutionService constitutionService, ObjectiveGroupService objGroupService, int tabbedPaneActiveTab) {
-        this.objGroupService = objGroupService;
+    public AddOrEditSchedule(String constitutionId, Schedule schedule, ConstitutionService constitutionService, ScheduleService scheduleService, int tabbedPaneActiveTab) {
+        this.scheduleService = scheduleService;
         this.constitutionService = constitutionService;
-        this.objGroup = objGroup;
+        this.schedule = schedule;
         this.constitution = constitutionService.getConstitution(constitutionId);
         this.tabbedPaneActiveTab = tabbedPaneActiveTab;
         
         initComponents();
 
-        if (objGroup != null) {
-            objNameTxtField.setText(objGroup.getName());
-            objGroupNoTxtField.setText(objGroup.getObjGroupNumber() + "");
-            objDataTxtArea.setText(objGroup.getTextContent());
+        if (schedule != null) {
+            scheduleNumberTxtField.setText(schedule.getSchedule_number() + "");
+            scheduleTitle.setText(schedule.getSchedule_title() );
+            scheduleTextArea.setText(schedule.getTextContent());
         }
 
     }
 
-    private AddOrEditObjectGroup() {
+    private AddOrEditSchedule() {
     }
 
     /** This method is called from within the constructor to
@@ -71,13 +71,13 @@ public class AddOrEditObjectGroup extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        objNameTxtField = new javax.swing.JTextField();
+        scheduleNumberTxtField = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        objGroupNoTxtField = new javax.swing.JTextField();
+        scheduleTitle = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        objDataTxtArea = new javax.swing.JTextArea();
+        scheduleTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -164,7 +164,7 @@ public class AddOrEditObjectGroup extends javax.swing.JFrame {
 
         jPanel5.setName("jPanel5"); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Constantia", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Constantia", 0, 12));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel4.setText("Home");
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -178,7 +178,7 @@ public class AddOrEditObjectGroup extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Constantia", 0, 12)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel6.setText("Add /  Edit Object Group");
+        jLabel6.setText("Add /  Edit Schedule");
         jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel6.setName("jLabel6"); // NOI18N
 
@@ -213,18 +213,18 @@ public class AddOrEditObjectGroup extends javax.swing.JFrame {
         jPanel7.setName("jPanel7"); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel7.setText("Name");
+        jLabel7.setText("Number");
         jLabel7.setName("jLabel7"); // NOI18N
 
-        objNameTxtField.setName("constitutionNameTxtField"); // NOI18N
+        scheduleNumberTxtField.setName("constitutionNameTxtField"); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel8.setText("Group Number");
+        jLabel8.setText("Title");
         jLabel8.setName("jLabel8"); // NOI18N
 
-        objGroupNoTxtField.setName("constitutionLanguageTxtField"); // NOI18N
+        scheduleTitle.setName("constitutionLanguageTxtField"); // NOI18N
 
-        jLabel9.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel9.setText("Data");
         jLabel9.setName("jLabel9"); // NOI18N
 
@@ -239,10 +239,10 @@ public class AddOrEditObjectGroup extends javax.swing.JFrame {
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
-        objDataTxtArea.setColumns(20);
-        objDataTxtArea.setRows(5);
-        objDataTxtArea.setName("objDataTxtArea"); // NOI18N
-        jScrollPane1.setViewportView(objDataTxtArea);
+        scheduleTextArea.setColumns(20);
+        scheduleTextArea.setRows(5);
+        scheduleTextArea.setName("scheduleTextArea"); // NOI18N
+        jScrollPane1.setViewportView(scheduleTextArea);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -257,10 +257,10 @@ public class AddOrEditObjectGroup extends javax.swing.JFrame {
                 .addGap(45, 45, 45)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(objGroupNoTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(objNameTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(scheduleTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(scheduleNumberTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 641, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(233, Short.MAX_VALUE))
+                .addContainerGap(270, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -268,10 +268,10 @@ public class AddOrEditObjectGroup extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(objNameTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(scheduleNumberTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(objGroupNoTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(scheduleTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
@@ -354,41 +354,30 @@ public class AddOrEditObjectGroup extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
 
-            objGroup.setName(objNameTxtField.getText());
-
-            if (ContentValidator.isInteger(objGroupNoTxtField.getText())) {
-                objGroup.setObjGroupNumber(Integer.parseInt(objGroupNoTxtField.getText()));
+            if (ContentValidator.isInteger(scheduleNumberTxtField.getText())) {
+                schedule.setSchedule_number(Integer.parseInt(scheduleNumberTxtField.getText()));
             } else {
-                MessageBox.showMessage("Supplied Group number not an integer", this, JOptionPane.ERROR_MESSAGE);
+                MessageBox.showMessage("Supplied Schedule number not an integer", this, JOptionPane.ERROR_MESSAGE);
             }
 
-            objGroup.setTextContent(objDataTxtArea.getText());
+            schedule.setSchedule_title(scheduleTitle.getText());
+            schedule.setTextContent(scheduleTextArea.getText());
 
-            objGroupService.validateObjectiveGroup(objGroup);
+            scheduleService.validateSchedule(schedule);
 
-            if (StringUtils.isEmpty(objGroup.getId())) {
-                objGroup.setConstitution(constitution);
-                constitution.addObjectiveGroup(objGroup);
+            if (StringUtils.isEmpty(schedule.getId())) {
+                schedule.setConstitution(constitution);
+                constitution.addSchedules(schedule);
                 constitutionService.save(constitution);
             } else {
-//                 Constitution c = constitutionService.getConstitution(objGroup.getConstitution().getId());
-//                        for(ObjectiveGroup o : c.getObjectiveGroups()){
-//                            if(o.getId().equals(objGroup.getId())){
-//                                c.removeObjectiveGroup(o);
-//                                c.addObjectiveGroup(objGroup);
-//                                constitutionService.save(constitution);
-//                                break;
-//                            }
-//                        }
-
-                objGroupService.save(objGroup);
+                scheduleService.save(schedule);
             }
 
-            objectiveGroupSaved = 1;
+            scheduleSaved = 1;
             goToPreviousScreen();
 
         } catch (ValidationException ex) {
-            Logger.getLogger(AddOrEditObjectGroup.class.getName()).log(Level.INFO, null, ex);
+            Logger.getLogger(AddOrEditSchedule.class.getName()).log(Level.INFO, null, ex);
             MessageBox.showMessage(ex.getMessage(), this, JOptionPane.ERROR_MESSAGE);
         }
 
@@ -413,17 +402,17 @@ public class AddOrEditObjectGroup extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea objDataTxtArea;
-    private javax.swing.JTextField objGroupNoTxtField;
-    private javax.swing.JTextField objNameTxtField;
+    private javax.swing.JTextField scheduleNumberTxtField;
+    private javax.swing.JTextArea scheduleTextArea;
+    private javax.swing.JTextField scheduleTitle;
     // End of variables declaration//GEN-END:variables
 
     private void goToPreviousScreen() {
         ViewObjGroupChapterSchedule vOGCSchedule = new ViewObjGroupChapterSchedule(constitution.getId(), constitutionService, tabbedPaneActiveTab);
         vOGCSchedule.setVisible(true);
 
-        if (objectiveGroupSaved == 1) {
-            MessageBox.showMessage("ObjectiveGroup saved sucessfully.", vOGCSchedule, JOptionPane.INFORMATION_MESSAGE);
+        if (scheduleSaved == 1) {
+            MessageBox.showMessage("Schedule saved sucessfully.", vOGCSchedule, JOptionPane.INFORMATION_MESSAGE);
         }
 
         this.dispose();

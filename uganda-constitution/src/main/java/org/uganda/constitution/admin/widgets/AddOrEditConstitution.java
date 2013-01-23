@@ -1,13 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * AddOrEditConstitution.java
- *
- * Created on Jan 11, 2013, 1:03:56 PM
- */
 package org.uganda.constitution.admin.widgets;
 
 import java.util.logging.Level;
@@ -28,28 +18,38 @@ import org.uganda.constitution.api.springbeans.ApplicationSpringBeans;
 @Component("addOrEditConsitution")
 public class AddOrEditConstitution extends javax.swing.JFrame {
 
-    private UgandaConsititution ugandaConstitution;
     private Constitution constitution;
-    
     private ConstitutionService constitutionService;
+    private int constitutionSaved = 0;
 
     /** Creates new form AddOrEditConstitution */
-    public AddOrEditConstitution(UgandaConsititution ugandaConstitution, Constitution constitution) {
-        this.ugandaConstitution = ugandaConstitution;
+    public AddOrEditConstitution(Constitution constitution) {
         this.constitution = constitution;
         this.constitutionService = ApplicationSpringBeans.getConstitutionService();
 
         initComponents();
 
-        if(constitution != null){
+        if (constitution != null) {
             cNameTxtField.setText(constitution.getName());
             cLanguageTxtField.setText(constitution.getLanguage());
-            cYearTxtField.setText(constitution.getYear()+"");
+            cYearTxtField.setText(constitution.getYear() + "");
         }
 
     }
 
     private AddOrEditConstitution() {
+    }
+
+    private void getPreviousScreen() {
+        this.dispose();
+        constitution = null;
+        UgandaConsititution ugConstitution = new UgandaConsititution();
+        ugConstitution.setVisible(true);
+
+        if (constitutionSaved == 1) {
+            MessageBox.showMessage("Constitution saved sucessfully.", ugConstitution, JOptionPane.INFORMATION_MESSAGE);
+        }
+
     }
 
     /** This method is called from within the constructor to
@@ -352,20 +352,18 @@ public class AddOrEditConstitution extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.dispose();
-        constitution = null;
-        ugandaConstitution.setVisible(true);
+        getPreviousScreen();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
             Constitution newConstitution;
-            if(constitution != null){
+            if (constitution != null) {
                 newConstitution = constitution;
-            }else{
-               newConstitution = new Constitution();
+            } else {
+                newConstitution = new Constitution();
             }
-             
+
             newConstitution.setName(cNameTxtField.getText());
             newConstitution.setLanguage(cLanguageTxtField.getText());
 
@@ -377,13 +375,11 @@ public class AddOrEditConstitution extends javax.swing.JFrame {
 
             constitutionService.validateConstitution(newConstitution);
             constitutionService.save(newConstitution);
-            
-           this.dispose();
-           UgandaConsititution  ugConstitution = new UgandaConsititution();
-           ugConstitution.setVisible(true);
-           MessageBox.showMessage("Constitution saved sucessfully.", ugConstitution, JOptionPane.INFORMATION_MESSAGE);
-           
-           
+
+            constitutionSaved = 1;
+
+            getPreviousScreen();
+
         } catch (ValidationException ex) {
             Logger.getLogger(AddOrEditConstitution.class.getName()).log(Level.INFO, null, ex);
             MessageBox.showMessage(ex.getMessage(), this, JOptionPane.ERROR_MESSAGE);

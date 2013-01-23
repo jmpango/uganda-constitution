@@ -43,7 +43,7 @@ public class UgandaConsititution extends javax.swing.JFrame {
                     int i = table.getSelectedRow();
                     id = table.getModel().getValueAt(i, 1);
                     Constitution constitution = constitutionService.getConstitution((String) id);
-                    ViewObjGroupChapterSchedule addCOCSchedule = new ViewObjGroupChapterSchedule(uGConstitution, constitution);
+                    ViewObjGroupChapterSchedule addCOCSchedule = new ViewObjGroupChapterSchedule(constitution.getId(), constitutionService, 0);
                     uGConstitution.dispose();
                     addCOCSchedule.setVisible(true);
                 }
@@ -296,7 +296,7 @@ public class UgandaConsititution extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
-        AddOrEditConstitution addOrEditConstitution = new AddOrEditConstitution(this, null);
+        AddOrEditConstitution addOrEditConstitution = new AddOrEditConstitution(null);
         addOrEditConstitution.setVisible(true);
         addOrEditConstitution.setExtendedState(MAXIMIZED_BOTH);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -312,7 +312,7 @@ public class UgandaConsititution extends javax.swing.JFrame {
 
             if (isCheckBoxChecked) {
                 Constitution constitution = constitutionService.getConstitution((String) id);
-                AddOrEditConstitution editConstitution = new AddOrEditConstitution(this, constitution);
+                AddOrEditConstitution editConstitution = new AddOrEditConstitution(constitution);
                 this.dispose();
                 editConstitution.setVisible(true);
             }

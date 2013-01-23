@@ -48,7 +48,7 @@ public class Clause extends BaseData {
         this.clauses = clauses;
     }
 
-    @Column(name = "text_content", nullable = true)
+    @Column(name = "text_content", nullable = true,length=10000)
     public String getTextContent() {
         return textContent;
     }

@@ -52,7 +52,7 @@ public class ObjectiveGroup extends BaseData {
         this.objGroupNumber = objGroupNumber;
     }
 
-    @Column(name = "text_content", nullable = true)
+    @Column(name = "text_content", nullable = true, length=10000 )
     public String getTextContent() {
         return textContent;
     }
