@@ -5,6 +5,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.uganda.constitution.api.service.ChapterService;
 import org.uganda.constitution.api.service.ConstitutionService;
 import org.uganda.constitution.api.service.ObjectiveGroupService;
+import org.uganda.constitution.api.service.ObjectiveService;
 import org.uganda.constitution.api.service.ScheduleService;
 
 /**
@@ -42,5 +43,9 @@ public class ApplicationSpringBeans {
 
     public static ScheduleService getScheduleService() {
         return (ScheduleService) _appContext.getBean("scheduleService");
+    }
+
+    public static ObjectiveService getObjectiveService() {
+        return (ObjectiveService) _appContext.getBean("objectiveService");
     }
 }

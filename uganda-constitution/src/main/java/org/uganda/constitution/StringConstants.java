@@ -38,4 +38,11 @@ public class StringConstants {
         return names;
     }
 
+    public static List<String> OBJECTIVE_COLUMN_NAMES() {
+        List<String> names = new ArrayList<String>();
+        names.add("Id");
+        names.add("Objective Number");
+        return names;
+    }
+
 }

@@ -39,7 +39,7 @@ public class ViewObjGroupChapterSchedule extends javax.swing.JFrame {
     private Constitution constitution;
     private int tabbedPaneActiveTab = 0;
 
-    public ViewObjGroupChapterSchedule(String constitutionId, ConstitutionService constitutionService, int tabbedPaneActiveTab) {
+    public ViewObjGroupChapterSchedule(String constitutionId, final ConstitutionService constitutionService, int tabbedPaneActiveTab) {
         this.objGroupService = ApplicationSpringBeans.getObjectiveGroupService();
         this.chapterService = ApplicationSpringBeans.getChapterService();
         this.scheduleService = ApplicationSpringBeans.getScheduleService();
@@ -51,6 +51,7 @@ public class ViewObjGroupChapterSchedule extends javax.swing.JFrame {
         this.objectiveGroupTable = initializeTableProperty(objectiveGroupTable, StringConstants.OBJ_GROUP_COLUMN_NAMES(), getObjGroupData());
         this.chapterTable = initializeTableProperty(chapterTable, StringConstants.CHAPTER_COLUMN_NAMES(), getChapterData());
         this.scheduleTable = initializeTableProperty(scheduleTable, StringConstants.SCHEDULE_COLUMN_NAMES(), getScheduleData());
+        this.addCOCSchedule = this;
 
         initComponents();
 
@@ -71,6 +72,15 @@ public class ViewObjGroupChapterSchedule extends javax.swing.JFrame {
 
                         ObjectiveGroup selectedObjectiveGroup = objGroupService.getObjectiveGroup((String) id);
                         objGroupTextArea.setText(selectedObjectiveGroup.getTextContent());
+                    }else if(e.getClickCount() == 2){
+                     Object id = null;
+                    int i = objectiveGroupTable.getSelectedRow();
+                    id = objectiveGroupTable.getModel().getValueAt(i, 1);
+
+                     ObjectiveGroup DoubleSelectedObjectiveGroup = objGroupService.getObjectiveGroup((String) id);
+                     ViewObjective viewObjective = new ViewObjective(DoubleSelectedObjectiveGroup.getId(), objGroupService, constitutionService);
+                     addCOCSchedule.dispose();
+                     viewObjective.setVisible(true);
                     }
                 }
             }
@@ -302,7 +312,7 @@ public class ViewObjGroupChapterSchedule extends javax.swing.JFrame {
 
         objGroupTextArea.setColumns(20);
         objGroupTextArea.setRows(5);
-        objGroupTextArea.setText("Select an objective to view its text content.");
+        objGroupTextArea.setText("Select an objectiveGroup to view its text content.");
         objGroupTextArea.setName("objGroupTextArea"); // NOI18N
         jScrollPane2.setViewportView(objGroupTextArea);
 
@@ -538,7 +548,7 @@ public class ViewObjGroupChapterSchedule extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Constantia", 0, 14));
         jLabel6.setText("Schedule (s)");
         jLabel6.setName("jLabel6"); // NOI18N
 

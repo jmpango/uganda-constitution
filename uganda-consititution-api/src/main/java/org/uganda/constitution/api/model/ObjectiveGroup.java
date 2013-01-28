@@ -1,5 +1,6 @@
 package org.uganda.constitution.api.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -8,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.Cascade;
 
 /**
  * Represents the Constitution ObjectiveGroup
@@ -62,12 +64,37 @@ public class ObjectiveGroup extends BaseData {
     }
 
     @OneToMany(mappedBy = "objectiveGroup", cascade = { CascadeType.ALL })
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE,
+        org.hibernate.annotations.CascadeType.DELETE,
+        org.hibernate.annotations.CascadeType.MERGE,
+        org.hibernate.annotations.CascadeType.PERSIST,
+        org.hibernate.annotations.CascadeType.DELETE_ORPHAN})
     public List<Objective> getObjectives() {
         return objectives;
     }
 
     public void setObjectives(List<Objective> objectives) {
         this.objectives = objectives;
+    }
+
+     public void addObjective(Objective objective) {
+        if (objective == null) {
+            return;
+        }
+
+        if (getObjectives() == null) {
+            setObjectives(new ArrayList<Objective>());
+        }
+
+        getObjectives().add(objective);
+    }
+
+    public void removeObjective(Objective objective) {
+        if (objective == null || getObjectives() == null) {
+            return;
+        }
+
+        getObjectives().remove(objective);
     }
 
 }
