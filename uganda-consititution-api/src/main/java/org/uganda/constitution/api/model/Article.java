@@ -46,7 +46,7 @@ public class Article extends BaseData {
     }
 
     @ManyToOne()
-    @JoinColumn(name = "chapter_id", nullable = false)
+    @JoinColumn(name = "chapter_id", nullable = true)
     public Chapter getChapter() {
         return chapter;
     }
@@ -74,7 +74,7 @@ public class Article extends BaseData {
     }
 
     @ManyToOne()
-    @JoinColumn(name = "schedule_id", nullable = false)
+    @JoinColumn(name = "schedule_id", nullable = true)
     public Schedule getSchedule() {
         return schedule;
     }

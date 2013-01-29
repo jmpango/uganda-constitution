@@ -31,8 +31,9 @@ public class ViewObjective extends javax.swing.JFrame {
     private ObjectiveGroup objGroup;
     private ConstitutionService constitutionService;
     private ObjectiveService objectiveService;
+    private ViewObjective viewObjective;
 
-    public ViewObjective(String objectiveGroupId, ObjectiveGroupService objectiveGroupService, ConstitutionService constitutionService) {
+    public ViewObjective(String objectiveGroupId, ObjectiveGroupService objectiveGroupService, final ConstitutionService constitutionService) {
         this.objGroupService = objectiveGroupService;
         this.constitutionService = constitutionService;
         this.objectiveService = ApplicationSpringBeans.getObjectiveService();
@@ -41,10 +42,12 @@ public class ViewObjective extends javax.swing.JFrame {
         this.objectiveTable = initializeTableProperty(objectiveTable, StringConstants.OBJECTIVE_COLUMN_NAMES(), getObjectiveData());
         initComponents();
 
+        this.viewObjective = this;
+
         constitutionNameLabel.setText(objGroup.getConstitution().getName());
         objectiveGroupLabel.setText(objGroup.getName());
 
-         objectiveTable.addMouseListener(new MouseAdapter() {
+        objectiveTable.addMouseListener(new MouseAdapter() {
 
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -56,15 +59,15 @@ public class ViewObjective extends javax.swing.JFrame {
 
                         Objective selectedObjective = objectiveService.getObjective((String) id);
                         objectiveTextArea.setText(selectedObjective.getTextContent());
-                    }else if(e.getClickCount() == 2){
-//                     Object id = null;
-//                    int i = objectiveGroupTable.getSelectedRow();
-//                    id = objectiveGroupTable.getModel().getValueAt(i, 1);
-//
-//                     ObjectiveGroup DoubleSelectedObjectiveGroup = objGroupService.getObjectiveGroup((String) id);
-//                     ViewObjective viewObjective = new ViewObjective(DoubleSelectedObjectiveGroup.getId(), objGroupService, constitutionService);
-//                     addCOCSchedule.dispose();
-//                     viewObjective.setVisible(true);
+                    } else if (e.getClickCount() == 2) {
+                        Object id = null;
+                        int i = objectiveTable.getSelectedRow();
+                        id = objectiveTable.getModel().getValueAt(i, 1);
+
+                        Objective doubleSelectedObjective = objectiveService.getObjective((String) id);
+                        ViewClause viewClause = new ViewClause(doubleSelectedObjective.getId(), objectiveService, constitutionService, objGroupService);
+                        viewObjective.dispose();
+                        viewClause.setVisible(true);
                     }
                 }
             }
@@ -124,8 +127,8 @@ public class ViewObjective extends javax.swing.JFrame {
         constitutionNameLabel = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel10 = new javax.swing.JLabel();
-        jSeparator2 = new javax.swing.JSeparator();
         objectiveGroupLabel = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -300,13 +303,13 @@ public class ViewObjective extends javax.swing.JFrame {
         jLabel10.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jLabel10.setName("jLabel10"); // NOI18N
 
-        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jSeparator2.setName("jSeparator2"); // NOI18N
-
         objectiveGroupLabel.setFont(new java.awt.Font("Tahoma", 1, 11));
         objectiveGroupLabel.setText(".");
         objectiveGroupLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         objectiveGroupLabel.setName("objectiveGroupLabel"); // NOI18N
+
+        jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jSeparator3.setName("jSeparator3"); // NOI18N
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -323,10 +326,10 @@ public class ViewObjective extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(objectiveGroupLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(749, Short.MAX_VALUE))
+                .addContainerGap(755, Short.MAX_VALUE))
             .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
@@ -338,7 +341,7 @@ public class ViewObjective extends javax.swing.JFrame {
                     .addComponent(constitutionNameLabel)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(objectiveGroupLabel)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
                 .addGap(8, 8, 8)
                 .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -455,7 +458,7 @@ public class ViewObjective extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JLabel objectiveGroupLabel;
     private javax.swing.JScrollPane objectiveScrollPane;
     private javax.swing.JTable objectiveTable;

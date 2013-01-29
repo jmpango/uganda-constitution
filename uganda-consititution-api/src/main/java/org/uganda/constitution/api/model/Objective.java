@@ -1,5 +1,6 @@
 package org.uganda.constitution.api.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -33,7 +34,7 @@ public class Objective extends BaseData {
     }
 
     @ManyToOne()
-    @JoinColumn(name = "objective_group_id", nullable = false)
+    @JoinColumn(name = "objective_group_id", nullable = true)
     public ObjectiveGroup getObjectiveGroup() {
         return objectiveGroup;
     }
@@ -59,4 +60,25 @@ public class Objective extends BaseData {
     public void setTextContent(String textContent) {
         this.textContent = textContent;
     }
+
+    public void addClause(Clause clause) {
+        if (clause == null) {
+            return;
+        }
+
+        if (getClauses() == null) {
+            setClauses(new ArrayList<Clause>());
+        }
+
+        getClauses().add(clause);
+    }
+
+    public void removeClause(Clause clause) {
+        if (clause == null || getClauses() == null) {
+            return;
+        }
+
+        getClauses().remove(clause);
+    }
+
 }

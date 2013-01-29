@@ -33,12 +33,18 @@ public class StringConstants {
     public static List<String> SCHEDULE_COLUMN_NAMES() {
         List<String> names = new ArrayList<String>();
         names.add("Id");
-        names.add("Schedule Number");
-        names.add("Title");
+        names.add("Clause Number");
         return names;
     }
 
     public static List<String> OBJECTIVE_COLUMN_NAMES() {
+        List<String> names = new ArrayList<String>();
+        names.add("Id");
+        names.add("Objective Number");
+        return names;
+    }
+
+    public static List<String> CLAUSE_COLUMN_NAMES() {
         List<String> names = new ArrayList<String>();
         names.add("Id");
         names.add("Objective Number");

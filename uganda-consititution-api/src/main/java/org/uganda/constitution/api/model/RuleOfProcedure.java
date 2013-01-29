@@ -26,7 +26,7 @@ public class RuleOfProcedure extends BaseData{
     public RuleOfProcedure(){}
 
     @ManyToOne()
-    @JoinColumn(name = "act_id", nullable = false)
+    @JoinColumn(name = "act_id", nullable = true)
     public Act getAct() {
         return act;
     }

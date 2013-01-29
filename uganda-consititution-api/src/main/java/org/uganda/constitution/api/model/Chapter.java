@@ -55,7 +55,7 @@ public class Chapter extends BaseData{
     }
 
     @ManyToOne()
-    @JoinColumn(name = "constitution_id", nullable = false)
+    @JoinColumn(name = "constitution_id", nullable = true)
     public Constitution getConstitution() {
         return constitution;
     }

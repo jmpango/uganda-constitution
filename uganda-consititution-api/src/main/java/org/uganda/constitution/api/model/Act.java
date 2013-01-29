@@ -36,7 +36,7 @@ public class Act extends BaseData{
     }
 
     @ManyToOne()
-    @JoinColumn(name = "article_id", nullable = false)
+    @JoinColumn(name = "article_id", nullable = true)
     public Article getArticle() {
         return article;
     }

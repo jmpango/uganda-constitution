@@ -28,7 +28,7 @@ public class Part extends BaseData{
     public Part(){}
 
     @ManyToOne()
-    @JoinColumn(name = "act_id", nullable = false)
+    @JoinColumn(name = "act_id", nullable = true)
     public Act getAct() {
         return act;
     }

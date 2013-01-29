@@ -58,7 +58,7 @@ public class Clause extends BaseData {
     }
 
     @ManyToOne()
-    @JoinColumn(name = "article_id", nullable = false)
+    @JoinColumn(name = "article_id", nullable = true)
     public Article getArticle() {
         return article;
     }
@@ -68,7 +68,7 @@ public class Clause extends BaseData {
     }
 
     @ManyToOne()
-    @JoinColumn(name = "objective_id", nullable = false)
+    @JoinColumn(name = "objective_id", nullable = true)
     public Objective getObjective() {
         return objective;
     }
@@ -78,7 +78,7 @@ public class Clause extends BaseData {
     }
 
     @ManyToOne()
-    @JoinColumn(name = "schedule_id", nullable = false)
+    @JoinColumn(name = "schedule_id", nullable = true)
     public Schedule getSchedule() {
         return schedule;
     }

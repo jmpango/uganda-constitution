@@ -35,7 +35,7 @@ public class Rule extends BaseData {
     }
 
     @ManyToOne()
-    @JoinColumn(name = "rule_of_procedure_id", nullable = false)
+    @JoinColumn(name = "rule_of_procedure_id", nullable = true)
     public RuleOfProcedure getRuleOfProcedure() {
         return ruleOfProcedure;
     }

@@ -27,7 +27,7 @@ public class Section extends BaseData{
     public Section(){}
 
     @ManyToOne()
-    @JoinColumn(name = "part_id", nullable = false)
+    @JoinColumn(name = "part_id", nullable = true)
     public Part getPart() {
         return part;
     }

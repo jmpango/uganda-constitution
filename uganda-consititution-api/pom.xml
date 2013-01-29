@@ -218,7 +218,7 @@
                         <taskdef resource="liquibasetasks.properties">
                             <classpath refid="maven.compile.classpath" />
                         </taskdef>
-                        <diffDatabaseToChangeLog driver="org.apache.derby.jdbc.EmbeddedDriver" url="jdbc:derby:${basedir}/src/main/resources/derby/database/ugConstitution-db" username="root" password="root" baseUrl="hibernate:hibernate.cfg.xml" outputFile="${basedir}/src/main/resources/constitutionChangelog.xml" classpathref="maven.compile.classpath">
+                        <diffDatabaseToChangeLog driver="org.apache.derby.jdbc.EmbeddedDriver" url="jdbc:derby:${basedir}/src/main/resources/derby/database/c-db" username="test" password="test" baseUrl="hibernate:hibernate.cfg.xml" outputFile="${basedir}/src/main/resources/constitutionChangelog.xml" classpathref="maven.compile.classpath">
                         </diffDatabaseToChangeLog>
                     </target>
                 </configuration>

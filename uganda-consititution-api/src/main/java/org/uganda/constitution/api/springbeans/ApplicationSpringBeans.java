@@ -3,6 +3,7 @@ package org.uganda.constitution.api.springbeans;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.uganda.constitution.api.service.ChapterService;
+import org.uganda.constitution.api.service.ClauseService;
 import org.uganda.constitution.api.service.ConstitutionService;
 import org.uganda.constitution.api.service.ObjectiveGroupService;
 import org.uganda.constitution.api.service.ObjectiveService;
@@ -48,4 +49,9 @@ public class ApplicationSpringBeans {
     public static ObjectiveService getObjectiveService() {
         return (ObjectiveService) _appContext.getBean("objectiveService");
     }
+
+    public static ClauseService getClauseService() {
+        return (ClauseService) _appContext.getBean("clauseService");
+    }
+
 }
